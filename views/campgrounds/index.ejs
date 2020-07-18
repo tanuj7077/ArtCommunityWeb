@@ -1,0 +1,75 @@
+<%- include("../partials/header") %> 
+
+<div class="container">
+    <div id="carouselExampleCaptions" class="carousel slide mb-3" data-ride="carousel">
+        <ol class="carousel-indicators">
+            <li data-target="#carouselExampleCaptions" data-slide-to="0" class="active"></li>
+            <li data-target="#carouselExampleCaptions" data-slide-to="1"></li>
+            <li data-target="#carouselExampleCaptions" data-slide-to="2"></li>
+            <li data-target="#carouselExampleCaptions" data-slide-to="3"></li>
+        </ol>
+        <div class="carousel-inner" id="shadow">
+            <div class="carousel-item active" data-interval="4000">
+                <img src="images/carousel/1.jpg" class="d-block w-100" alt="...">
+                <div class="carousel-caption d-none d-md-block">
+                <h3>Welcome to GodArt</h3>
+                <p>An online social community for photographers, artists and art enthusiasts</p>
+                </div>
+            </div>
+            <div class="carousel-item" data-interval="4000">
+                <img src="images/carousel/2.png" class="d-block w-100" alt="...">
+                <div class="carousel-caption d-none d-md-block">
+                <h3>Find your inspiration</h3>
+                <p>Images with different tags are posted here. Some may give you ideas to create your own masterpiece.</p>
+                </div>
+            </div>
+            <div class="carousel-item" data-interval="4000">
+                <img src="images/carousel/3.jpg" class="d-block w-100" alt="...">
+                <div class="carousel-caption d-none d-md-block">
+                <h3>Explore</h3>
+                <p>Click on the Explore section to go through different tags.</p>
+                </div>
+            </div>
+            <div class="carousel-item" data-interval="4000">
+                <img src="images/carousel/4.jpg" class="d-block w-100" alt="...">
+                <div class="carousel-caption d-none d-md-block">
+                <h3>Fourth slide label</h3>
+                <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur.</p>
+                </div>
+            </div>
+        </div>
+        <a class="carousel-control-prev" href="#carouselExampleCaptions" role="button" data-slide="prev">
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="sr-only">Previous</span>
+        </a>
+        <a class="carousel-control-next" href="#carouselExampleCaptions" role="button" data-slide="next">
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="sr-only">Next</span>
+        </a>
+    </div>
+    <div class="card-columns">
+        <% campgrounds.forEach(function(campground){ %>
+            <a id="Card" href="/campgrounds/<%= campground._id %>">
+            <div class="card mt-1 pt-0" id="indexCard">
+                <img class="card-img-top lazyload" src="uploads/<%= campground.image %>" lazyload="on">
+                <div class="card-body px-2 py-2">
+                    <h6 class="card-title text-center"><%= campground.name %></h6>
+                </div>
+                <div class="d-flex justify-content-around align-items-start mb-2">
+                    <span style="font-size: 1em;">
+                        <i class="fas fa-heart" style="display: inline;"></i>
+                        <p style="display: inline;"><%= campground.likesArray.length %></p>
+                    </span>
+                    <span style="font-size: 1em;">
+                        <i class="fas fa-comment-dots" style="display: inline;"></i>
+                        <p style="display: inline;"><%= campground.comments.length %></p>
+                    </span>
+                </div>
+            </div>
+            </a>    
+        <% }); %>
+    </div>
+    
+
+</div>
+<%- include("../partials/footer") %> 

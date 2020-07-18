@@ -1,0 +1,37 @@
+<%- include("../partials/header") %> 
+
+<div class="container">
+    <h1 class="display-4 text-center mt-3" style="color: white;">Edit <%= campground.name %></h1>
+    <div class="row">
+        <div style="width: 30%; margin: 40px auto;">
+            <form action="/campgrounds/<%= campground._id %>?_method=PUT" method="POST">
+                <div class="form-group">
+                    <input class="form-control" type="text" name="campground[name]" value="<%= campground.name %>">
+                </div>
+                <div class="form-group">
+                    <input id="p" class="form-control convert" type="text" name="campground[description]" value="<%= campground.description %>">
+                </div>
+                <div class="form-group">
+                    <input type="submit" class="btn btn-primary btn-block">
+                </div>
+            </form>
+            <a href="/campgrounds">Go Back</a>
+        </div>
+    </div>    
+</div>
+<script>
+    //needed because textarea doesnt support attr value
+    $("input#p").on("click", function () {
+        $("input.convert").each(function () {
+            var $txtarea = $("<textarea />");
+            $txtarea.attr("id", this.id);
+            $txtarea.attr("class", "form-control");
+            $txtarea.attr("rows", 4);
+            $txtarea.attr("name", "campground[description]");
+            $txtarea.val(this.value);
+            $(this).replaceWith($txtarea);
+        });
+    });
+</script>
+
+<%- include("../partials/footer") %> 

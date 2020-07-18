@@ -1,0 +1,31 @@
+<%- include("../partials/header") %> 
+<div class="container">
+    <% if(len){ %>
+    <div class="card-columns">
+        <% campgrounds.forEach(function(campground){ %>
+            <a id="Card" href="/campgrounds/<%= campground._id %>">
+            <div class="card mt-1 pt-0" id="indexCard">
+                <img class="card-img-top lazyload" src="uploads/<%= campground.image %>" lazyload="on">
+                <div class="card-body px-2 py-2">
+                    <h6 class="card-title text-center"><%= campground.name %></h6>
+                </div>
+                <div class="d-flex justify-content-around align-items-start mb-2">
+                    <span style="font-size: 1em;">
+                        <i class="fas fa-heart" style="display: inline;"></i>
+                        <p style="display: inline;"><%= campground.likesArray.length %></p>
+                    </span>
+                    <span style="font-size: 1em;">
+                        <i class="fas fa-comment-dots" style="display: inline;"></i>
+                        <p style="display: inline;"><%= campground.comments.length %></p>
+                    </span>
+                </div>
+            </div>
+            </a>    
+        <% }); %>
+    </div>
+    <% } else{ %>
+        <p class="display-4"> You have not posted anything yet.</p>
+        <a class="btn btn-primary" href="/campgrounds/new">Add Post</a>
+    <% } %>
+</div>
+<%- include("../partials/footer") %> 

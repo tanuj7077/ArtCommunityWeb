@@ -1,0 +1,169 @@
+<%- include("../partials/header") %> 
+<div class="container">
+    <div class="row mt-3 justify-content-center">
+        <!--
+        <div class="col-md-3">
+            <p class="lead">YelpCamp</p>
+            <div class="list-group">
+                <li class="list-group-item active">Item 1 </li>
+                <li class="list-group-item">Item 1 </li>
+                <li class="list-group-item">Item 1 </li>
+            </div>
+        </div>-->
+        <div class="col-md-11">
+            <div class="card" id="overlayCard">
+
+                <img class="card-img-top embed-responsive embed-responsive-16by9" src="../uploads/<%= campground.image %>">
+
+                <div class="card-img-overlay">
+                    <h5 class="card-title"><%= campground.name %></h5>
+                </div>
+
+                <div class="card-body px-2 py-2  d-flex justify-content-around align-items-start" id="card-body">
+                    <!----------------------Buttons Section---------------------->
+                    <% if(currentUser && campground.author.id.equals(currentUser._id)){ %>
+                    <a id="editIcon" class="btn btn-link" href="/campgrounds/<%= campground._id %>/edit">
+                        <span class="iconText" style="font-size: 1.5em;">
+                            <i class="fas fa-pen"></i>
+                        </span>
+                    </a>
+                    <form id="deleteForm" action="/campgrounds/<%= campground._id %>?_method=DELETE" method="POST">
+                        <button id="deleteIcon" class="btn btn-link">
+                            <span class="iconText" style="font-size: 1.5em;">
+                                <i class="fas fa-trash"></i>
+                            </span>
+                        </button>
+                    </form>
+                    <% } %>
+                    <a id="infoIcon" class="btn btn-link" data-toggle="collapse" href="#infoSection">
+                        <span class="iconText" style="font-size: 1.5em;">
+                            <i class="fas fa-info-circle" style="display: inline;"></i>
+                        </span>
+                    </a>
+                    <!--
+                    <button class="btn btn-link" disabled>
+                        <span style="font-size: 1.5em; color: rgb(255, 255, 255);">
+                            <i class="fas fa-eye" style="display: inline;"></i>
+                            <p style="display: inline;">campground.views</p>
+                        </span>
+                    </button>
+                    -->
+                    <a id="likeIcon" class="btn btn-link" href="/campgrounds/<%= campground._id %>/like">
+                        <span class="iconText" style="font-size: 1.5em;">
+                            <i class="fas fa-heart" style="display: inline;"></i>
+                            <p style="display: inline;"><%= campground.likesArray.length %></p>
+                        </span>
+                    </a>
+                    <a id="commentIcon" class="btn btn-link" data-toggle="collapse" href="#commentSection">
+                        <span class="iconText" style="font-size: 1.5em;">
+                            <i class="fas fa-comment-dots" style="display: inline;"></i>
+                            <p style="display: inline;"><%= campground.comments.length %></p>
+                        </span>
+                    </a>
+                </div>
+
+                <div id="extraSection">
+                <!---------------------------Info Section-------------------------->
+                    <div id="infoSection" class="card-footer py-0  collapse multi-collapse" id="card-body">
+                        <div class="px-2 py-3">
+                            <h5 class="card-title" style="color: rgb(126, 223, 122); display:inline;"><strong><%= campground.name %></strong></h5>
+                            <span id="date" class="float-right"><%= campground.datePosted %></span>
+                            <h6 class="card-subtitle text-muted">- <%= campground.author.username %></h6>
+                            <p class="card-text mt-2 text-justify"><%= campground.description %></p>
+                        </div>
+                        <div class="px-2 pt-2 pb-3">
+                            <% campground.tags.forEach(function(tag){ %>
+                            <a href="/tags/<%= tag %>" class="btn btn-light btn-sm mr-2 tagBtn"><strong><%= tag %></strong></a>
+                            <% }) %>
+                        </div>
+                    </div>
+                
+                <!--------------------------Comment Section------------------------->
+                    <div id="commentSection" class="card-footer collapse multi-collapse py-0" id="card-body">
+                        <div class="px-2">
+                        <% if(!currentUser){ %>
+                            <div class="text-center">
+                                <a class="btn btn-primary mt-3 " href="/campgrounds/<%= campground._id %>/comments/new">Sign in to leave a comment</a>
+                            </div>
+                        <% } %>
+                            <div class="row justify-content-center">
+                                <div class="container mt-4">
+                                    <% if(currentUser){ %>   
+                                        <form action="/campgrounds/<%= campground._id %>/comments" method="POST">
+                                            <div class="form-group">
+                                                <input id="commentInput" class="form-control" type="text" name="comment[text]" placeholder="Add a public comment">
+                                            </div>
+                                        </form>
+                                    <% } %>
+                                </div>
+                                <div class="col-md-11">
+                                <% campground.comments.forEach(function(comment){ %>
+                                    <div id="eachComment" class="pb-2 px-2">
+                                                
+                                        <strong style="color: #229954 ;"><%= comment.author.username %></strong>
+                                        <span id="date" class="float-right"><%= comment.datePosted %></span>
+                                        <span id="dateDetails" class="float-right"></span>
+                                                <!--
+                                                <script>
+                                                    var then = moment(document.getElementById("date").innerHTML).fromNow();
+                                                    document.getElementById("dateDetails").innerHTML = then; 
+                                                </script>-->
+                                        <p class="text-justify  mb-0"><%= comment.text %></p>
+                                        <% if(currentUser && comment.author.id.equals(currentUser._id)){ %>
+                                        <a id="editIcon" class="btn btn-link pl-0 pt-0 mt-0" href="/campgrounds/<%= campground._id %>/comments/<%= comment._id %>/edit">
+                                            <span class="iconText" style="font-size: 0.8em;">
+                                                <i class="fas fa-pen"></i>
+                                            </span>
+                                        </a>
+                                        <form id="deleteForm" action="/campgrounds/<%= campground._id %>/comments/<%= comment._id %>?_method=DELETE" method="POST">
+                                            <button id="deleteIcon" class="btn btn-link pt-0 mt-0">
+                                                <span class="iconText" style="font-size: 0.8em;">
+                                                    <i class="fas fa-trash"></i>
+                                                </span>
+                                            </button>
+                                        </form>
+                                        <% } %>
+                                    </div>
+                                <% }) %>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>   
+    </div>   
+</div>
+
+<div class="container">
+    <% if(campgrounds){ %>
+    <p class="mt-4" style="color: aliceblue;"><%= msg %></p>
+    <div class="card-columns">
+        <% campgrounds.forEach(function(campground){ %>
+            <a id="Card" href="/campgrounds/<%= campground._id %>">
+            <div class="card mt-1 pt-0" id="indexCard">
+                <img class="card-img-top lazyload" src="../uploads/<%= campground.image %>" lazyload="on">
+                <div class="card-body px-2 py-2">
+                    <h6 class="card-title text-center"><%= campground.name %></h6>
+                </div>
+                <div class="d-flex justify-content-around align-items-start mb-2">
+                    <span style="font-size: 1em;">
+                        <i class="fas fa-heart" style="display: inline;"></i>
+                        <p style="display: inline;"><%= campground.likesArray.length %></p>
+                    </span>
+                    <span style="font-size: 1em;">
+                        <i class="fas fa-comment-dots" style="display: inline;"></i>
+                        <p style="display: inline;"><%= campground.comments.length %></p>
+                    </span>
+                </div>
+            </div>
+            </a>    
+        <% }); %>
+    </div>
+    <% } %>
+</div>
+    
+</div>
+
+
+<%- include("../partials/footer") %> 

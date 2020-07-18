@@ -1,0 +1,20 @@
+<%- include("../partials/header") %> 
+<p class="display-4 text-center mb-3 pb-3">Popular Tags</p>
+<div class="container">
+    <div class="card-columns" id="tagCardColumn">
+        <% tags.forEach(function(tag){ %>
+            <a href="/tags/<%= tag.text %>" class="card mb-2" id="overlayTagCard">
+                
+                <img class="card-img-top lazyload" src="../tagImage/<%= tag.text %>.jpg" style="border-radius: .5rem;" lazyload="on">
+                <div class="card-img-overlay d-flex">
+                    <div class="my-auto mx-auto text-center">
+                        <h3 class="card-title" style="color: white;">#<%= tag.text %></h3>
+                    </div>
+                </div>
+                
+            </a>    
+        <% }); %>
+    </div>
+</div>
+
+<%- include("../partials/footer") %> 

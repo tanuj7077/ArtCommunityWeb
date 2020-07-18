@@ -1,0 +1,281 @@
+body{
+    /*background-color: rgb(216, 241, 211);*/
+    background-color: #212121;
+}
+p{
+    color: white;
+}
+
+.img-thumbnail{
+    padding: 0;
+} 
+.caption-full{
+    padding: 10px;
+}
+#deleteForm{
+    display: inline;
+}
+
+.card{
+    background-color: #3a3838;
+    font-family: 'Montserrat', sans-serif;
+    color: white;
+    border-radius: .5rem;
+    border: none;
+    transition: .35s ease;
+}
+
+.card-img-top {
+    opacity: 1;
+    display: block;
+    width: 100%;
+    height: auto;
+    transition: .5s ease;
+    backface-visibility: hidden;
+}
+
+.card-img-overlay {
+    transition: .5s ease;
+    opacity: 0;
+    z-index: 0;
+}
+
+#card-body{
+    z-index: 1;
+}
+
+
+
+#overlayCard:hover .card-img-top {
+    opacity: 0.6;
+}
+  
+#overlayCard:hover .card-img-overlay {
+    opacity: 1;
+}
+
+/* For explore page*/
+#overlayTagCard:hover .card-img-top {
+    opacity: 0.3;
+}
+  
+#overlayTagCard:hover .card-img-overlay {
+    opacity: 1;
+}
+
+#overlayTagCard:hover{
+    transform:scale(1.03);
+    transition: .35s;
+}
+
+
+
+  
+/*Icon Animation*/
+.iconText {
+    color: white;
+    transition: .5s ease;
+}
+
+#editIcon:hover .iconText{
+    transition: .35s ease;
+    color: #1ABC9C ;
+}
+
+#deleteIcon:hover span{
+    transition: .35s ease;
+    color: rgb(224, 38, 38) ;
+}
+
+#likeIcon:hover span{
+    transition: .35s ease;
+    color: rgb(255, 0, 0) ;
+}
+#infoIcon:hover span{
+    transition: .35s ease;
+    color: rgb(35, 199, 98) ;
+}
+#commentIcon:hover span{
+    transition: .35s ease;
+    color: rgb(95, 196, 255) ;
+}
+#searchIcon:hover span{
+    transition: .35s ease;
+    color: rgb(35, 199, 98) ;
+}
+
+/*Card hover transition*/
+#indexCard:hover {
+    transition: .35s ease;
+    transform:scale(1.03);
+    cursor: pointer;
+    border-radius: .5rem;
+}
+
+#indexCard:hover .card-title{
+    transition: .35s ease;
+    color: rgb(35, 199, 98) ;
+}
+
+#indexCard .card-title{
+    transition: .35s ease;
+}
+
+#Card{
+    color: white;
+}
+/*distortion in topmost images*/
+.card-img-top{
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+}
+
+/*Comment styles*/
+#extraSection{
+    background-color: #3a3838;
+    border-radius: .5rem;
+    z-index: 2;
+}
+#commentSection p{
+    color: white;
+}
+
+#commentInput{
+    background-color: #3a3838 ;
+    color: white;
+    border: 2px solid rgb(126, 223, 122);
+    border-radius: .5rem;
+}
+
+textarea:hover, 
+input:hover, 
+textarea:active, 
+input:active, 
+textarea:focus, 
+input:focus,
+button:focus,
+button:active,
+button:hover,
+label:focus,
+.btn:active,
+.btn.active
+{
+    outline:0px !important;
+    -webkit-appearance:none;
+    box-shadow: none !important;
+}
+/*Tag button animation*/
+.btn{
+    border: 0;
+    transition: .35s ease;
+}
+.tagBtn:hover{
+    border: 0;
+    background-color: rgb(29, 156, 24);
+    color: white;
+    transition: .35s ease;
+}
+
+/*Carousel */
+.carousel-item {
+  height: 400px;
+  border-radius: .5rem;
+}
+
+#carouselExampleCaptions img{
+    border-radius: .5rem;
+}
+@media(max-width:769px){
+    .carousel-item {
+        height: 300px;
+      }
+}
+@media(max-width:767px){
+    #carouselExampleCaptions {
+        display: none;
+      }
+}
+
+/* Text shadow */
+#shadow{
+    color: whitesmoke;
+    text-shadow: 4px 4px 4px rgba(0,0,0,0.5);
+}
+/* NavBar */
+#mainNavbar{
+    font-size: 1.2rem;
+    font-weight: 400;
+}
+#mainNavbar .navbar-brand{
+    color: rgb(29, 156, 24);
+    font-size: 1.5rem;
+}
+#mainNavbar .nav-link{
+    color: white;
+}
+#mainNavbar .nav-link:hover{
+    color: rgb(29, 156, 24);
+}
+
+
+/*Masonry Grid*/
+.card-columns{
+    column-gap: 0.85rem;
+}
+@media(min-width:360px){
+    .card-columns{
+        column-count: 1;
+    }
+}
+@media(min-width:576px){
+    .card-columns{
+        column-count: 2;
+    }
+}
+@media(min-width:768px){
+    .card-columns{
+        column-count: 3;
+    }
+}
+@media(min-width:992px){
+    .card-columns{
+        column-count: 4;
+    }
+}
+@media(min-width:1200px){
+    .card-columns{
+        column-count: 3;
+    }
+    #tagCardColumn{
+        column-count: 4;
+    }
+}
+
+/*Just some tweaking*/
+.btn-link{
+    color: rgba(255, 255, 255, 0);
+}
+.btn-link:hover {
+    color: rgba(255, 255, 255, 0);
+}
+
+/*Card hover transition
+#indexCard:hover {
+    transition: .35s ease;
+    transform:scale(1.03);
+    cursor: pointer;
+    border-radius: .5rem;
+}
+
+#indexCard:hover .card-title{
+    transition: .35s ease;
+    color: rgb(35, 199, 98) ;
+}
+
+#indexCard .card-title{
+    transition: .35s ease;
+}
+
+#Card{
+    color: white;
+}*/
