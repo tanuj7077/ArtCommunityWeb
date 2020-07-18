@@ -34,7 +34,12 @@ mongoose.connect("mongodb+srv://tanuj:piku1234@artcommunity.0gx5j.mongodb.net/sh
 //mongodb+srv://tanuj:piku1234@artcommunity.0gx5j.mongodb.net/share?retryWrites=true&w=majority
 
 //passport config
-app.use(require("express-session")({
+/*app.use(require("express-session")({
+    secret: "He is a psycho",
+    resave: false,
+    saveUninitialized: false
+}));*/
+app.use(require("cookie-session")({
     secret: "He is a psycho",
     resave: false,
     saveUninitialized: false
