@@ -124,11 +124,11 @@ p{
 #Card{
     color: white;
 }
-/*distortion in topmost images*/
+/*distortion in topmost images
 .card-img-top{
     border-top-left-radius: 0;
     border-top-right-radius: 0;
-}
+}*/
 
 /*Comment styles*/
 #extraSection{
@@ -239,12 +239,15 @@ label:focus,
 }
 @media(min-width:992px){
     .card-columns{
+        column-count: 3;
+    }
+    #tagCardColumn{
         column-count: 4;
     }
 }
 @media(min-width:1200px){
     .card-columns{
-        column-count: 3;
+        column-count: 4;
     }
     #tagCardColumn{
         column-count: 4;

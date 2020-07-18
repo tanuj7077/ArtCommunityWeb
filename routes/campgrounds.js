@@ -154,7 +154,7 @@ router.get("/new", middleware.isLoggedIn, function(req,res){
     tags = ["abstract","pop","cubism","outside","photography","insect","reptile","bird","beach","sea","night","ship",
     "sunset","flower","sky","nature","snow","tree","digital","river","bridge","festival","macro","aurora","clouds","mountain",
     "building","farm","sculpture","old","food","car","monochrome","garden","family","city","cat","dog","season",
-    "winter","summer","spring","leaf","landscape","fanart","portrait","waterColor","games","sports"]
+    "winter","summer","spring","leaf","landscape","fanart","portrait","waterColor","games","sports","digitalArt","fantasy"];
     res.render("campgrounds/new", {tags: tags, navSearch: navSearch});
 })
 
