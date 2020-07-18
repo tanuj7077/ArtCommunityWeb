@@ -23,10 +23,15 @@ app.use(methodOverride("_method"));
 app.use(flash());
 
 //creating the database
-mongoose.connect("mongodb://localhost/share3",{
+/*mongoose.connect("mongodb://localhost/share3",{
+    useUnifiedTopology: true,
+    useNewUrlParser:true,
+});*/
+mongoose.connect("mongodb+srv://tanuj:piku1234@artcommunity.0gx5j.mongodb.net/share?retryWrites=true&w=majority",{
     useUnifiedTopology: true,
     useNewUrlParser:true,
 });
+//mongodb+srv://tanuj:piku1234@artcommunity.0gx5j.mongodb.net/share?retryWrites=true&w=majority
 
 //passport config
 app.use(require("express-session")({
