@@ -6,7 +6,7 @@
         <% campgrounds.forEach(function(campground){ %>
             <a id="Card" href="/campgrounds/<%= campground._id %>">
             <div class="card mt-1 pt-0" id="indexCard">
-                <img class="card-img-top lazyload" src="../uploads/<%= campground.image %>" lazyload="on">
+                <img class="card-img-top lazyload" src="<%= campground.image %>" lazyload="on">
                 <div class="card-body px-2 py-2">
                     <h6 class="card-title text-center"><%= campground.name %></h6>
                 </div>

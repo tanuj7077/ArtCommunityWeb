@@ -13,7 +13,7 @@
         <div class="col-md-11">
             <div class="card" id="overlayCard">
 
-                <img class="card-img-top embed-responsive embed-responsive-16by9" src="../uploads/<%= campground.image %>">
+                <img class="card-img-top embed-responsive embed-responsive-16by9" src="<%= campground.image %>">
 
                 <div class="card-img-overlay">
                     <h5 class="card-title"><%= campground.name %></h5>
@@ -142,7 +142,7 @@
         <% campgrounds.forEach(function(campground){ %>
             <a id="Card" href="/campgrounds/<%= campground._id %>">
             <div class="card mt-1 pt-0" id="indexCard">
-                <img class="card-img-top lazyload" src="../uploads/<%= campground.image %>" lazyload="on">
+                <img class="card-img-top lazyload" src="<%= campground.image %>" lazyload="on">
                 <div class="card-body px-2 py-2">
                     <h6 class="card-title text-center"><%= campground.name %></h6>
                 </div>

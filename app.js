@@ -1,4 +1,7 @@
 var express = require("express"),
+    aws = require("aws-sdk"),
+    multerS3 = require("multer-s3"),
+    path = require("path"),
     app = express(),
     bodyParser = require("body-parser"),
     mongoose = require("mongoose"),

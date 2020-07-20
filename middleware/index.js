@@ -2,7 +2,17 @@
 var Campground = require("../models/campgrounds");
 var Comment= require("../models/comment");
 var Tag = require("../models/tag");
-var fs = require('fs');
+
+//adding to aws s3
+var aws = require("aws-sdk"),
+    multerS3 = require("multer-s3");
+
+const s3 = new aws.S3({
+ accessKeyId: 'AKIATZVYTY44PPPVRSAH',
+ secretAccessKey: '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',
+ Bucket: 'god-art-bucket',
+ region: 'ap-south-1'
+});
 var middlewareObj = {};
 
 middlewareObj.checkCampgroundOwner = function(req, res, next){
@@ -56,21 +66,25 @@ middlewareObj.deleteRelated = function(req, res, next){
     if(req.isAuthenticated()){
         Campground.findById(req.params.id, function(err, foundCampground){
 
-            //Delete images
-            var filePath =__dirname + "/../public/uploads/" + foundCampground.image;
-            fs.unlink(filePath, function(er){
-                if(er){
-                    console.log(er);
-                }
-                else{
+            s3.deleteObject({
+                Bucket: 'god-art-bucket',
+                Key: foundCampground.imageKey
+            },function (err,data){
+                if(err){
+                    console.log(err);
+                    return next()
+                } else{
+                    console.log(foundCampground.imageKey);
+                    console.log(data);
                     console.log("file deleted");
                     return next();
                 }
-            });
-
+            })
+            
             //Delete comments
             for(let comment of foundCampground.comments){
                 Comment.findByIdAndDelete(comment._id,function(err){
+                    console.log("comment deleted")
                 });
             }
 
@@ -80,6 +94,7 @@ middlewareObj.deleteRelated = function(req, res, next){
                     if(err){
                         console.log(err);
                     } else{
+                        console.log("tags deleted");
                         for(let t of allTags){
                             if(t.text == tag){
                                 for(var i = 0; i < t.campgrounds.length; i++){
@@ -98,7 +113,6 @@ middlewareObj.deleteRelated = function(req, res, next){
             }
         });
     }
-    //req.flash("error", "You need to login first");
 }
 
 middlewareObj.deleteComment = function(req, res, next){
@@ -110,7 +124,6 @@ middlewareObj.deleteComment = function(req, res, next){
             }
         });
     }
-    //req.flash("error", "You need to login first");
 }
 
 

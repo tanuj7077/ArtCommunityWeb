@@ -10,6 +10,44 @@ var moment = require("moment");
 var multer = require('multer');
 var path = require('path');
 
+//adding to aws s3
+var aws = require("aws-sdk"),
+    multerS3 = require("multer-s3");
+
+const s3 = new aws.S3({
+ accessKeyId: 'AKIATZVYTY44PPPVRSAH',
+ secretAccessKey: '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',
+ Bucket: 'god-art-bucket',
+ region: 'ap-south-1'
+});
+const upload = multer({
+    storage: multerS3({
+        s3: s3,
+        bucket: 'god-art-bucket',
+        acl: 'public-read',
+        key: function (req, file, cb) {
+        cb(null, path.basename( file.originalname, path.extname( file.originalname ) ) + '-' + Date.now() + path.extname( file.originalname ) )
+        }
+    }),
+    limits:{ fileSize: 7000000 }, // In bytes: 2000000 bytes = 2 MB
+    fileFilter: function( req, file, cb ){
+        checkFileType( file, cb );
+    }
+    }).single('image');
+function checkFileType( file, cb ){
+ // Allowed ext
+ const filetypes = /jpeg|jpg|png|gif/;
+ // Check ext
+ const extname = filetypes.test( path.extname( file.originalname ).toLowerCase());
+ // Check mime
+ const mimetype = filetypes.test( file.mimetype );
+ if( mimetype && extname ){
+    return cb( null, true );
+ } else {
+  cb( 'Error: Images Only!' );
+ }
+}
+/*--------Multer Local------------
 // Set The Storage Engine
 const storage = multer.diskStorage({
     destination: './public/uploads/',
@@ -43,7 +81,7 @@ var upload = multer({
       cb('Error: Images Only!');
     }
   }
-  
+  */
 //INDEX
 router.get("/", function(req,res){
     //get all campgrounds from DB
@@ -77,13 +115,19 @@ router.post("/search", function(req, res){
 router.post("/", middleware.isLoggedIn, function(req,res){
     upload(req, res, function(err){
         if(err){
+            console.log(err);
             res.redirect("/campgrounds");
         } else {
         if(req.file == undefined){
+            console.log("undefined");
             res.redirect("/campgrounds");
         } else {
+            console.log(req.file);
+            console.log(typeof(req.file.key));
             var name = req.body.name;
-            var image = req.file.filename;
+            //var image = req.file.filename;
+            var image = req.file.location;
+            var imageKey = req.file.key;
             var desc = req.body.description;
             var Tags = req.body.tags;
             var datePosted = moment().format('ddd MMM DD YYYY HH:mm');
@@ -91,7 +135,7 @@ router.post("/", middleware.isLoggedIn, function(req,res){
                         id: req.user._id,
                         username: req.user.username
                         }
-            var newCampground = {tags: Tags, name: name, image: image, description: desc, author: author, datePosted: datePosted};
+            var newCampground = {tags: Tags, name: name, image: image, imageKey: imageKey, description: desc, author: author, datePosted: datePosted};
             //create a new campground and save to DB
             var tags=[];
             if(typeof(Tags)=="string"){//when only 1 tag is given it is interpreted as a string thus the need to convert to object
