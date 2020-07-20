@@ -22,12 +22,14 @@
                 <div class="card-body px-2 py-2  d-flex justify-content-around align-items-start" id="card-body">
                     <!----------------------Buttons Section---------------------->
                     <% if(currentUser && campground.author.id.equals(currentUser._id)){ %>
-                    <a id="editIcon" class="btn btn-link" href="/campgrounds/<%= campground._id %>/edit">
+                    <!--<a id="editIcon" class="btn btn-link" href="/campgrounds/ campground._id /edit">-->
+                    <a id="editIcon" class="btn btn-link" href="/posts/<%= campground._id %>/edit">
                         <span class="iconText" style="font-size: 1.5em;">
                             <i class="fas fa-pen"></i>
                         </span>
                     </a>
-                    <form id="deleteForm" action="/campgrounds/<%= campground._id %>?_method=DELETE" method="POST">
+                    <!--<form id="deleteForm" action="/campgrounds/ campground._id ?_method=DELETE" method="POST">-->
+                    <form id="deleteForm" action="/posts/<%= campground._id %>?_method=DELETE" method="POST">
                         <button id="deleteIcon" class="btn btn-link">
                             <span class="iconText" style="font-size: 1.5em;">
                                 <i class="fas fa-trash"></i>
@@ -48,7 +50,8 @@
                         </span>
                     </button>
                     -->
-                    <a id="likeIcon" class="btn btn-link" href="/campgrounds/<%= campground._id %>/like">
+                    <!--<a id="likeIcon" class="btn btn-link" href="/campgrounds/ campground._id /like">-->
+                    <a id="likeIcon" class="btn btn-link" href="/posts/<%= campground._id %>/like">
                         <span class="iconText" style="font-size: 1.5em;">
                             <i class="fas fa-heart" style="display: inline;"></i>
                             <p style="display: inline;"><%= campground.likesArray.length %></p>
@@ -83,13 +86,16 @@
                         <div class="px-2">
                         <% if(!currentUser){ %>
                             <div class="text-center">
-                                <a class="btn btn-primary mt-3 " href="/campgrounds/<%= campground._id %>/comments/new">Sign in to leave a comment</a>
+                                <!--<a class="btn btn-primary mt-3 " href="/campgrounds/ campground._id /comments/new">Sign in to leave a comment</a>
+                                -->
+                                <a class="btn btn-primary mt-3 " href="/posts/<%= campground._id %>/comments/new">Sign in to leave a comment</a>
                             </div>
                         <% } %>
                             <div class="row justify-content-center">
                                 <div class="container mt-4">
                                     <% if(currentUser){ %>   
-                                        <form action="/campgrounds/<%= campground._id %>/comments" method="POST">
+                                        <!--<form action="/campgrounds/ campground._id/comments" method="POST">-->
+                                        <form action="/posts/<%= campground._id %>/comments" method="POST">
                                             <div class="form-group">
                                                 <input id="commentInput" class="form-control" type="text" name="comment[text]" placeholder="Add a public comment">
                                             </div>
@@ -110,12 +116,14 @@
                                                 </script>-->
                                         <p class="text-justify  mb-0"><%= comment.text %></p>
                                         <% if(currentUser && comment.author.id.equals(currentUser._id)){ %>
-                                        <a id="editIcon" class="btn btn-link pl-0 pt-0 mt-0" href="/campgrounds/<%= campground._id %>/comments/<%= comment._id %>/edit">
+                                        <!--<a id="editIcon" class="btn btn-link pl-0 pt-0 mt-0" href="/campgrounds/ campground._id /comments/<%= comment._id %>/edit">-->
+                                        <a id="editIcon" class="btn btn-link pl-0 pt-0 mt-0" href="/posts/<%= campground._id %>/comments/<%= comment._id %>/edit">
                                             <span class="iconText" style="font-size: 0.8em;">
                                                 <i class="fas fa-pen"></i>
                                             </span>
                                         </a>
-                                        <form id="deleteForm" action="/campgrounds/<%= campground._id %>/comments/<%= comment._id %>?_method=DELETE" method="POST">
+                                        <!--<form id="deleteForm" action="/campgrounds/ campground._id /comments/<%= comment._id %>?_method=DELETE" method="POST">-->
+                                        <form id="deleteForm" action="/posts/<%= campground._id %>/comments/<%= comment._id %>?_method=DELETE" method="POST">
                                             <button id="deleteIcon" class="btn btn-link pt-0 mt-0">
                                                 <span class="iconText" style="font-size: 0.8em;">
                                                     <i class="fas fa-trash"></i>
@@ -140,7 +148,8 @@
     <p class="mt-4" style="color: aliceblue;"><%= msg %></p>
     <div class="card-columns">
         <% campgrounds.forEach(function(campground){ %>
-            <a id="Card" href="/campgrounds/<%= campground._id %>">
+            <!--<a id="Card" href="/campgrounds/campground._id ">-->
+            <a id="Card" href="/posts/campground._id "></a>
             <div class="card mt-1 pt-0" id="indexCard">
                 <img class="card-img-top lazyload" src="<%= campground.image %>" lazyload="on">
                 <div class="card-body px-2 py-2">

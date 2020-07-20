@@ -3,7 +3,8 @@
     <% if(len){ %>
     <div class="card-columns">
         <% campgrounds.forEach(function(campground){ %>
-            <a id="Card" href="/campgrounds/<%= campground._id %>">
+            <!--<a id="Card" href="/campgrounds/ campground._id ">-->
+            <a id="Card" href="/posts/<%= campground._id %>">
             <div class="card mt-1 pt-0" id="indexCard">
                 <img class="card-img-top lazyload" src="<%= campground.image %>" lazyload="on">
                 <div class="card-body px-2 py-2">
@@ -25,7 +26,8 @@
     </div>
     <% } else{ %>
         <p class="display-4"> You have not posted anything yet.</p>
-        <a class="btn btn-primary" href="/campgrounds/new">Add Post</a>
+        <!--<a class="btn btn-primary" href="/campgrounds/new">Add Post</a>-->
+        <a class="btn btn-primary" href="/posts/new">Add Post</a>
     <% } %>
 </div>
 <%- include("../partials/footer") %> 

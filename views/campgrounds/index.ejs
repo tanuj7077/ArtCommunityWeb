@@ -49,7 +49,8 @@
     </div>
     <div class="card-columns">
         <% campgrounds.forEach(function(campground){ %>
-            <a id="Card" href="/campgrounds/<%= campground._id %>">
+            <!--<a id="Card" href="/campgrounds/campground._id ">-->
+            <a id="Card" href="/posts/<%= campground._id %>">
             <div class="card mt-1 pt-0" id="indexCard">
                 <!--<img class="card-img-top lazyload" src="uploads/ campground.image " lazyload="on">-->
                 <img class="card-img-top lazyload" src="<%= campground.image %>" lazyload="on">

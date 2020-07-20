@@ -116,11 +116,13 @@ router.post("/", middleware.isLoggedIn, function(req,res){
     upload(req, res, function(err){
         if(err){
             console.log(err);
-            res.redirect("/campgrounds");
+            res.redirect("/posts");
+            //res.redirect("/campgrounds");
         } else {
         if(req.file == undefined){
             console.log("undefined");
-            res.redirect("/campgrounds");
+            res.redirect("/posts");
+            //res.redirect("/campgrounds");
         } else {
             console.log(req.file);
             console.log(typeof(req.file.key));
@@ -182,8 +184,9 @@ router.post("/", middleware.isLoggedIn, function(req,res){
                             }
                             });
                     }
-                    console.log("Campground created")
-                    res.redirect("/campgrounds");
+                    console.log("Post created")
+                    res.redirect("/posts");
+                    //res.redirect("/campgrounds");
                 }
             });   
         }
@@ -245,9 +248,11 @@ router.get("/:id/edit", middleware.checkCampgroundOwner, function(req,res){
 router.put("/:id",middleware.isLoggedIn, function(req,res){
     Campground.findByIdAndUpdate(req.params.id, req.body.campground, function(err, updatedCampground){
         if(err){
-            res.redirect("/campgrounds");
+            //res.redirect("/campgrounds");
+            res.redirect("/posts");
         } else{
-            res.redirect("/campgrounds/" + req.params.id);
+            //res.redirect("/campgrounds/" + req.params.id);
+            res.redirect("/posts/" + req.params.id);
         }
     });
 });
@@ -280,9 +285,11 @@ router.get("/:id/like", middleware.isLoggedIn, function(req,res){
 router.delete("/:id", middleware.checkCampgroundOwner, middleware.deleteRelated, function(req,res){
     Campground.findByIdAndDelete(req.params.id,function(err){
         if(err){
-            res.redirect("/campgrounds");
+            res.redirect("/posts");
+            //res.redirect("/campgrounds");
         }else{
-            res.redirect("/campgrounds");
+            res.redirect("/posts");
+            //res.redirect("/campgrounds");
         }
     });
 });

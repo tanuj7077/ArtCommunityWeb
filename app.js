@@ -65,10 +65,12 @@ app.use(function(req, res, next){
 
 //adding the routes
 app.use(indexRoutes);
-app.use("/campgrounds", campgroundRoutes); //we removed /campgrounds from  .js
+app.use("/posts", campgroundRoutes);
+//app.use("/campgrounds", campgroundRoutes); //we removed /campgrounds from  .js
 app.use("/tags", tagRoutes),
 app.use("/myPosts",myPostRoutes);
-app.use("/campgrounds/:id/comments", commentRoutes);
+app.use("/posts/:id/comments", commentRoutes);
+//app.use("/campgrounds/:id/comments", commentRoutes);
 
 var port = process.env.PORT || 8080;
 app.listen(port,function(){
