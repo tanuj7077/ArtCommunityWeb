@@ -124,8 +124,6 @@ router.post("/", middleware.isLoggedIn, function(req,res){
             res.redirect("/posts");
             //res.redirect("/campgrounds");
         } else {
-            console.log(req.file);
-            console.log(typeof(req.file.key));
             var name = req.body.name;
             //var image = req.file.filename;
             var image = req.file.location;

@@ -239,7 +239,7 @@ label:focus,
 }
 @media(min-width:992px){
     .card-columns{
-        column-count: 3;
+        column-count: 4;
     }
     #tagCardColumn{
         column-count: 4;
@@ -247,7 +247,7 @@ label:focus,
 }
 @media(min-width:1200px){
     .card-columns{
-        column-count: 4;
+        column-count: 3;
     }
     #tagCardColumn{
         column-count: 4;
