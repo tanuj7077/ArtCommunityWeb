@@ -65,7 +65,7 @@ app.use("/tags", tagRoutes),
 app.use("/myPosts",myPostRoutes);
 app.use("/posts/:id/comments", commentRoutes);
 
-var port = process.env.PORT || 8080;
+var port = process.env.PORT || 8000;
 app.listen(port,function(){
     console.log("Started at ", port);
 });
